@@ -1,10 +1,13 @@
 {
+  "dependencies": {
+    "@gouvfr/dsfr": "^1.12.1"
+  },
   "scripts": {
-    "check-dsfr-version": "for /f \"delims=\" %i in ('npm view @gouvfr/dsfr version --silent') do if exist dsfr\\v%i (echo La dernière version %i du DSFR est déjà installée) else (echo Une mise à jour du DSFR est disponible : %i)",
     "download-dsfr": "npm install @gouvfr/dsfr",
-    "create-version-folder": "for /f \"delims=\" %i in ('npm view @gouvfr/dsfr version --silent') do (mkdir dsfr\\v%i && echo Dossier dsfr\\v%i créé)",
-    "copy-files": "copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.min.css dsfr\\v%VERSION%\\dsfr.min.css && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.module.min.js dsfr\\v%VERSION%\\dsfr.module.min.js && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.nomodule.min.js dsfr\\v%VERSION%\\dsfr.nomodule.min.js && xcopy node_modules\\@gouvfr\\dsfr\\dist\\icons\\* dsfr\\v%VERSION%\\icons\\ /E /I && xcopy node_modules\\@gouvfr\\dsfr\\dist\\fonts\\* dsfr\\v%VERSION%\\fonts\\ /E /I && copy node_modules\\@gouvfr\\dsfr\\dist\\utility\\utility.min.css dsfr\\v%VERSION%\\utility\\utility.min.css",
-    "remove-node-modules": "rmdir /s /q node_modules",
-    "install-dsfr": "npm run download-dsfr && npm run check-dsfr-version && npm run create-version-folder && npm run copy-files && npm run remove-node-modules && echo Une nouvelle version a été installée avec succès, veuillez vérifier que tous les fichiers nécessaires ont bien été copiés dans dsfr\\v%VERSION% et vous assurer qu'il n'y a pas de régression lors de la migration de vos pages vers cette nouvelle version."
+    "copy-files": "for /f \"delims=\" %i in ('npm view @gouvfr/dsfr version --silent') do (mkdir dsfr\\v%i\\utility && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.min.css dsfr\\v%i\\dsfr.min.css && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.module.min.js dsfr\\v%i\\dsfr.module.min.js && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.nomodule.min.js dsfr\\v%i\\dsfr.nomodule.min.js && xcopy node_modules\\@gouvfr\\dsfr\\dist\\icons\\* dsfr\\v%i\\icons\\ /E /I && xcopy node_modules\\@gouvfr\\dsfr\\dist\\fonts\\* dsfr\\v%i\\fonts\\ /E /I && copy node_modules\\@gouvfr\\dsfr\\dist\\utility\\utility.min.css dsfr\\v%i\\utility\\utility.min.css)",
+    "cleanup": "rmdir /s /q node_modules && del package-lock.json",
+    "update-svg-version": "for /f %i in ('npm view @gouvfr/dsfr version --silent') do (powershell -Command \"(Get-Content last-version.svg) -replace 'v[0-9]+\\.[0-9]+\\.[0-9]+', 'v%i' | Set-Content last-version.svg\")",
+    "dl-last-dsfr-version": "for /f \"delims=\" %i in ('npm view @gouvfr/dsfr version --silent') do if exist dsfr\\v%i (echo La dernière version %i du DSFR est déjà installée) else (npm run download-dsfr --silent && npm run copy-files --silent && npm run cleanup --silent && npm run update-svg-version --silent && echo Une nouvelle version a été installée avec succès, veuillez vérifier que tous les fichiers nécessaires ont bien été copiés dans dsfr\\v%i et vous assurer qu'il n'y a pas de régression lors de la migration de vos pages vers cette nouvelle version.)",
+    "check-dsfr-version": "for /f \"delims=\" %i in ('npm view @gouvfr/dsfr version --silent') do if exist dsfr\\v%i (echo La dernière version %i du DSFR est déjà installée) else (echo Une mise à jour du DSFR est disponible : %i.)"
   }
 }
