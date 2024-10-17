@@ -1,0 +1,16 @@
+:root {
+  --blue-france-sun-113-625: #000091;
+  --blue-france-sun-113-625-hover: #00006b;
+  --blue-france-sun-113-625-active: #00005e;
+  --blue-france-925-125: #e3e3fd;
+  --blue-france-925-125-hover: #c1c1fb;
+  --blue-france-925-125-active: #adadf9;
+  --blue-france-975-sun-113: #f5f5fe;
+  --blue-france-main-525: #6a6af4;
+}
+:root {
+  --blue-france-975-75: #e3f4ee;
+}
+.fr-btn {
+  border-radius: 1.5rem;
+}

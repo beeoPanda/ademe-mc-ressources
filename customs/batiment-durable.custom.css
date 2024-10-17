@@ -1,0 +1,30 @@
+:root {
+  --blue-france-sun-113-625: #21c7c7;
+  --blue-france-sun-113-625-hover: #14a5a5;
+  --blue-france-sun-113-625-active: #007171;
+  --blue-france-925-125: #e5f9f9;
+  --blue-france-925-125-hover: #c1efef;
+  --blue-france-925-125-active: #96e5e5;
+  --blue-france-975-sun-113: #e5f9f9;
+  --blue-france-main-525: #4dd2d2;
+}
+.fr-toggle input[type=checkbox]:checked~.fr-toggle__label:after {
+  --data-uri-svg: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%2321c7c7' d='m10 15.17 9.2-9.2 1.4 1.42L10 18l-6.36-6.36 1.4-1.42z'/%3E%3C/svg%3E");
+}
+.fr-toggle label:before {
+  --data-uri-svg: url("data:image/svg+xml;charset=utf-8,%3Csvg width='40' stroke='%2321c7c7' height='24' fill='transparent' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='.5' y='.5' width='39' height='23' rx='11.5'/%3E%3C/svg%3E");
+}
+.fr-toggle input[type=checkbox]:checked~.fr-toggle__label:before {
+  --data-uri-svg: url("data:image/svg+xml;charset=utf-8,%3Csvg width='40' stroke='%2321c7c7' height='24' fill='%2321c7c7' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='.5' y='.5' width='39' height='23' rx='11.5'/%3E%3C/svg%3E");
+}
+:root {
+  --blue-france-975-75: #d9f6f7;
+  --blue-france-975-75-hover: #dcfbfc;
+  --blue-france-975-75-active: #ccf8fa;
+}
+:root {
+  --border-plain-grey: var(--border-plain-blue-france);
+}
+.fr-btn {
+  border-radius: .25rem;
+}

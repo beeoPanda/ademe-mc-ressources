@@ -1,11 +1,10 @@
 {
-  "dependencies": {
-    "@gouvfr/dsfr": "^1.11.2"
-  },
   "scripts": {
-    "check-dsfr": "if exist ademe-dsfr\\dsfr (rmdir /s /q ademe-dsfr\\dsfr)",
-    "create-dsfr": "mkdir ademe-dsfr\\dsfr && mkdir ademe-dsfr\\dsfr\\icons && mkdir ademe-dsfr\\dsfr\\fonts && mkdir ademe-dsfr\\dsfr\\utility",
-    "copy-files": "copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.min.css ademe-dsfr\\dsfr\\dsfr.min.css && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.module.min.js ademe-dsfr\\dsfr\\dsfr.module.min.js && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.nomodule.min.js ademe-dsfr\\dsfr\\dsfr.nomodule.min.js && xcopy node_modules\\@gouvfr\\dsfr\\dist\\icons\\* ademe-dsfr\\dsfr\\icons\\ /E /I && xcopy node_modules\\@gouvfr\\dsfr\\dist\\fonts\\* ademe-dsfr\\dsfr\\fonts\\ /E /I && copy node_modules\\@gouvfr\\dsfr\\dist\\utility\\utility.min.css ademe-dsfr\\dsfr\\utility\\utility.min.css && echo 'Tous les fichiers du DSFR on bien été copiés'",
-    "first-setup-dsfr": "npm run check-dsfr && npm run create-dsfr && npm run copy-files"
+    "check-dsfr-version": "for /f \"delims=\" %i in ('npm view @gouvfr/dsfr version --silent') do if exist dsfr\\v%i (echo La dernière version %i du DSFR est déjà installée) else (echo Une mise à jour du DSFR est disponible : %i)",
+    "download-dsfr": "npm install @gouvfr/dsfr",
+    "create-version-folder": "for /f \"delims=\" %i in ('npm view @gouvfr/dsfr version --silent') do (mkdir dsfr\\v%i && echo Dossier dsfr\\v%i créé)",
+    "copy-files": "copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.min.css dsfr\\v%VERSION%\\dsfr.min.css && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.module.min.js dsfr\\v%VERSION%\\dsfr.module.min.js && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.nomodule.min.js dsfr\\v%VERSION%\\dsfr.nomodule.min.js && xcopy node_modules\\@gouvfr\\dsfr\\dist\\icons\\* dsfr\\v%VERSION%\\icons\\ /E /I && xcopy node_modules\\@gouvfr\\dsfr\\dist\\fonts\\* dsfr\\v%VERSION%\\fonts\\ /E /I && copy node_modules\\@gouvfr\\dsfr\\dist\\utility\\utility.min.css dsfr\\v%VERSION%\\utility\\utility.min.css",
+    "remove-node-modules": "rmdir /s /q node_modules",
+    "install-dsfr": "npm run download-dsfr && npm run check-dsfr-version && npm run create-version-folder && npm run copy-files && npm run remove-node-modules && echo Une nouvelle version a été installée avec succès, veuillez vérifier que tous les fichiers nécessaires ont bien été copiés dans dsfr\\v%VERSION% et vous assurer qu'il n'y a pas de régression lors de la migration de vos pages vers cette nouvelle version."
   }
 }

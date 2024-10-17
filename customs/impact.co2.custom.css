@@ -1,0 +1,140 @@
+:root {
+  --error-425-625: #b31800;
+  --success-425-625: #26827c;
+  --grey-950-100: #f9f7f8;
+  --neutral-20: #eae5e8;
+  --blue-france-925-125: #e0f4f3;
+  --blue-france-925-125-hover: #c4eae7;
+  --blue-france-925-125-active: #afe0dd;
+  --blue-france-main-525: #35a099;
+  --blue-france-sun-113-625: #26827c;
+  --blue-france-sun-113-625-hover: #0c5956;
+  --blue-france-sun-113-625-active: #13706d;
+}
+
+.impact-co2-background {
+  background-color: #fff;
+  border-radius: 12px;
+  border: 2px solid var(--neutral-20);
+}
+
+.impact-co2-background-light {
+  background-color: var(--blue-france-925-125);
+  border-radius: 12px;
+  border: 2px solid var(--blue-france-925-125-active);
+}
+
+.fr-input {
+  align-items: center;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: none !important;
+  border: 2px solid var(--blue-france-925-125-active);
+}
+
+.fr-input:not([disabled]):hover {
+  border: 2px solid var(--blue-france-main-525);
+}
+
+.fr-checkbox-group input[type=checkbox]+label:before {
+  background-image: none;
+  border: 2px solid var(--blue-france-sun-113-625);
+  border-radius: .5rem;
+}
+
+.fr-checkbox-group input[type=checkbox]:checked+label:before {
+  background-color: var(--blue-france-main-525) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M11.7255 2.83986L5.63692 10.8336C5.51281 10.9949 5.35341 11.1255 5.17097 11.2156C4.98852 11.3057 4.78787 11.3527 4.5844 11.3532C4.38204 11.3543 4.18208 11.3093 3.99971 11.2216C3.81735 11.1339 3.65736 11.0057 3.53189 10.847L0.281086 6.70352C0.173486 6.5653 0.0941633 6.40724 0.0476475 6.23837C0.00113161 6.0695 -0.0116664 5.89312 0.00998373 5.7193C0.0316339 5.54548 0.0873084 5.37762 0.173829 5.22532C0.260349 5.07301 0.37602 4.93924 0.514238 4.83164C0.652457 4.72404 0.810514 4.64472 0.979388 4.5982C1.14826 4.55169 1.32464 4.53889 1.49846 4.56054C1.67228 4.58219 1.84014 4.63787 1.99244 4.72439C2.14474 4.81091 2.27852 4.92658 2.38612 5.0648L4.55776 7.83597L9.59384 1.17449C9.80938 0.89181 10.1284 0.706334 10.4807 0.658862C10.833 0.611389 11.1897 0.70581 11.4724 0.921351C11.7551 1.13689 11.9405 1.4559 11.988 1.80819C12.0355 2.16049 11.9411 2.51721 11.7255 2.79989V2.83986Z' fill='%23fff'%3E%3C/path%3E%3C/svg%3E") !important;
+  background-size: 0.75rem;
+  background-position: 0.25rem 0.25rem;
+}
+
+[contenteditable]:not([contenteditable=false]):focus,
+[tabindex]:focus,
+a:focus,
+audio:focus[controls],
+details:focus,
+details>summary:first-of-type:focus,
+input:focus,
+.fr-input:focus,
+input[type=button]:focus,
+input[type=checkbox]:focus+label:before,
+input[type=image]:focus,
+input[type=radio]:focus+label:before,
+input[type=reset]:focus,
+input[type=submit]:focus,
+select:focus,
+textarea:focus,
+video:focus[controls] {
+  border: 2px solid var(--blue-france-sun-113-625) !important;
+  outline: 4px solid var(--blue-france-925-125-active) !important;
+  outline-offset: 0px;
+}
+
+.fr-btn,
+.fr-btns-group:not(.fr-btns-group--sm):not(.fr-btns-group--lg) .fr-btn:not([class^=fr-icon-]):not([class*=" fr-icon-"]):not([class^=fr-fi-]):not([class*=" fr-fi-"]) {
+  padding: 1rem 2rem;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  border-radius: 8px;
+}
+
+.fr-radio-group input[type=radio]+label:before {
+    border: 2px solid var(--blue-france-sun-113-625);
+}
+
+.fr-radio-group input[type=radio]:checked+label {
+  background-image: radial-gradient(transparent 10px, var(--blue-france-sun-113-625) 11px, transparent 12px), radial-gradient(var(--blue-france-sun-113-625) 6px, transparent 7px), radial-gradient(var(--blue-france-925-125-active) 10px, transparent 10px);
+}
+
+.fr-radio-group input[type=radio]:checked+label:hover {
+  background-image: radial-gradient(transparent 10px, var(--blue-france-sun-113-625-active) 11px, transparent 12px), radial-gradient(var(--blue-france-sun-113-625-active) 6px, transparent 7px), radial-gradient(var(--blue-france-925-125-active) 10px, transparent 10px);
+}
+
+.impact-co2-background-light .fr-checkbox-group input[type=checkbox]:not(:checked)+label:before,
+.impact-co2-background-light .fr-input:not([disabled]) {
+  background-color: #ffffff;
+}
+
+.fr-alert {
+  margin-bottom: 0 !important;
+  background-color: unset;
+  background-image: none;
+  padding: 0 0 0 2.5rem;
+  border: none !important;
+}
+.fr-alert:before {
+  height: 40px;
+  margin: -0.5rem 0.5rem 0.5rem 0 !important;
+  width: 40px;
+  color: transparent;
+}
+.fr-alert__title {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
+}
+.fr-alert p, .fr-alert a {
+  margin-left: -2.5rem;
+}
+.fr-alert p:first-of-type, .fr-alert a:first-of-type {
+  margin-top: 1.5rem;
+}
+.fr-alert a {
+  display: inline-block;
+}
+.fr-alert--error .fr-alert__title {
+  color: var(--error-425-625);
+}
+.fr-alert--success .fr-alert__title {
+  color: var(--success-425-625);
+}
+.fr-alert--error:before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40' fill='none'%3E%3Crect x='1' y='1' width='38' height='38' rx='19' fill='white'/%3E%3Crect x='1' y='1' width='38' height='38' rx='19' stroke='%23FCB0A4' stroke-width='2'/%3E%3Cpath d='M26.0557 15.3643C26.4462 15.7548 26.4462 16.388 26.0557 16.7785L22.5672 20.267L26.077 23.7769C26.4675 24.1674 26.4675 24.8005 26.077 25.1911L25.1911 26.077C24.8005 26.4675 24.1674 26.4675 23.7769 26.077L20.267 22.5672L16.7572 26.077C16.3667 26.4675 15.7336 26.4675 15.343 26.077L14.4571 25.1911C14.0666 24.8005 14.0666 24.1674 14.4571 23.7769L17.9669 20.267L14.4571 16.7572C14.0666 16.3667 14.0666 15.7336 14.4571 15.343L15.343 14.4571C15.7336 14.0666 16.3667 14.0666 16.7572 14.4571L20.267 17.9669L23.7556 14.4784C24.1461 14.0879 24.7793 14.0879 25.1698 14.4784L26.0557 15.3643Z' fill='%23B31800'/%3E%3C/svg%3E");
+  -webkit-mask-image : none;
+  mask-image: none;
+}
+.fr-alert--success:before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40' fill='none'%3E%3Crect x='1' y='1' width='38' height='38' rx='19' fill='white'/%3E%3Crect x='1' y='1' width='38' height='38' rx='19' stroke='%23AFE0DD' stroke-width='2'/%3E%3Cpath d='M27.157 16.0499L19.5462 26.0421C19.3911 26.2436 19.1918 26.4069 18.9638 26.5195C18.7357 26.6321 18.4849 26.691 18.2306 26.6916C17.9776 26.6929 17.7277 26.6367 17.4997 26.527C17.2717 26.4174 17.0718 26.2572 16.9149 26.0587L12.8514 20.8794C12.7169 20.7067 12.6178 20.5091 12.5596 20.298C12.5015 20.0869 12.4855 19.8664 12.5125 19.6491C12.5396 19.4319 12.6092 19.2221 12.7173 19.0317C12.8255 18.8413 12.9701 18.6741 13.1429 18.5396C13.3156 18.4051 13.5132 18.3059 13.7243 18.2478C13.9354 18.1896 14.1559 18.1736 14.3731 18.2007C14.5904 18.2278 14.8002 18.2974 14.9906 18.4055C15.181 18.5137 15.3482 18.6583 15.4827 18.831L18.1973 22.295L24.4924 13.9681C24.7618 13.6148 25.1606 13.3829 25.6009 13.3236C26.0413 13.2643 26.4872 13.3823 26.8405 13.6517C27.1939 13.9211 27.4257 14.3199 27.4851 14.7603C27.5444 15.2006 27.4264 15.6465 27.157 15.9999V16.0499Z' fill='%2335A099'/%3E%3C/svg%3E");
+  -webkit-mask-image : none;
+  mask-image: none;
+}

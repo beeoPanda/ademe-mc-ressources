@@ -1,0 +1,24 @@
+:root {
+  --blue-france-sun-113-625: #4900a3;
+  --blue-france-sun-113-625-hover: #32006f;
+  --blue-france-sun-113-625-active: #260056;
+  --border-plain-grey: var(--border-plain-blue-france);
+}
+:root[data-fr-theme=dark] {
+  --blue-france-975-75: #4900a3;
+  --grey-200-850: #3a3a3a;
+  --border-plain-grey: #8585f6;
+  --grey-425-625: #cecece;
+}
+.fr-btn {
+  --background-action-high-blue-france: #5feaff;
+  --background-action-high-blue-france-hover: #5feaff;
+  --background-action-high-blue-france-active: #5feaff;
+  --text-inverted-blue-france: #4900a3;
+}
+.fr-alert--success {
+  background-image: linear-gradient(0deg, #5feaff, #5feaff), linear-gradient(0deg, #5feaff, #5feaff), linear-gradient(0deg, #5feaff, #5feaff), linear-gradient(0deg, #5feaff, #5feaff), linear-gradient(0deg, #5feaff, #5feaff);
+}
+.fr-alert--success:before {
+  color: #4900a3;
+}
