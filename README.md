@@ -24,6 +24,47 @@ Voir les [conditions générales d'utilisation](doc/legal/cgu.md).
 
 >This Design System is only meant to be used by official French public services' websites and apps. Its main purpose is to make it easy to identify governmental websites for citizens. See terms.
 
+## Démarrage
+
+**Prérequis :**
+- Installer [VSCode](https://code.visualstudio.com/) (ou un autre éditeur de texte équivalent).
+- Installer [Github Desktop](https://desktop.github.com/download/).
+
+### GIT Clone
+
+Une fois que vous disposez des droit de contribution au projet (contactez votre responsable ADEME dans le cas contraire), la prochaine étape consiste à cloner ce projet sur votre environnement local. Pour cela, depuis le dossier local ou vous souhaitez travailler, entrez la commande suivante dans un terminal :
+
+```
+git clone <URL_DU_PROJET>
+```
+
+🙌 Vous pouvez désormais ouvrir le nouveau dossier du projet créé dans votre éditeur préféré et travailler sur les fichiers.
+
+### Déploiement
+
+*Process Github Desktop à définir...*
+
+### Mise à jour du DSFR
+
+**Prérequis :**
+- Installer [Node.js](https://nodejs.org/fr).
+
+Pour mettre à jour le DSFR, vous pouvez utiliser les commandes suivantes dans un terminal depuis la racine du projet.
+
+Pour vérifier si la dernière version est installée :
+
+```
+npm run check-dsfr-version
+```
+
+Pour installer la dernière version :
+
+```
+npm run dl-last-dsfr-version
+```
+
+***Remarque :*** *Une nouvelle version n'écrase jamais la précédente ! Un nouveau dossier de version est crée sous `dsfr/`* 
+
 ## Structure du DSFR de l'ADEME
 
 ```
@@ -39,116 +80,90 @@ Voir les [conditions générales d'utilisation](doc/legal/cgu.md).
     └── fonts/
     └── utility/
       └── utility.min.css
+└── images/
 └── ademe.main.css
 └── ademe.main.js
 ```
 
-Les polices de caractères utilisées sur le DS, à savoir la Marianne et la Spectral, sont des fichiers .woff et .woff2, ils doivent se trouver dans le répertoire `fonts`. Les dossiers `fonts` et `favicon` doivent être placés au même niveau que le dossier contenant le CSS du core du dsfr (ou au même niveau que le css `dsfr.min.css` à la racine de dist, qui contient le core).
+L'ensemble des ressources utiles du DSFR sont copiées sous `dsfr/` et sont **versionnées** dans les sous-dossiers `vX.X.X/`.
 
-Le fichier `utility.min.css` doit être placé un niveau plus bas que le dossier `icons`, dans dossier utility par exemple, pour respecter les chemins d'accès vers les icônes.
+Les ressources sous `dsfr/` **ne doivent pas être modifiées**. Pour ajuster le style et le comportement du DSFR au sein de l'ensemble des sites de l'ADEME, nous utilisons les fichiers `ademe.main.css` et `ademe.main.js` à la racine du projet. Pour des ajustements du DSFR spécifiques à certaines pages, les fichiers devront être placés sous `customs/`.
 
-### Le HTML
+Les ressources images complémentaires du DSFR pourront être chargées dans le dossier `images/`
 
-Le point de départ de l’utilisation du DSFR  est la création de fichiers HTML, afin de pouvoir utiliser les différents composants. Ces fichiers sont à mettre à la racine de votre projet. L’exemple ci dessous est le code minimal afin de pouvoir utiliser le DSFR.
+Les polices de caractères utilisées sur le DSFR, à savoir la Marianne et la Spectral, sont des fichiers .woff et .woff2, ils doivent se trouver dans le répertoire `fonts/`. Les dossiers `fonts/` et `favicon/` doivent être placés sous `dsfr/vX.X.X/`.
 
-L’ajout de l’attribut **data-fr-scheme** sur la balise html permet d’activer la gestion des thèmes clair et sombre. Les valeurs possibles sont `system`, `light`, `dark`. La valeur “system” permet d’utiliser la configuration définie sur le système d’exploitation de l’utilisateur.
+Le fichier `utility.min.css` doit être placé un niveau plus bas que le dossier `icons/`, dans dossier `utility/` par exemple, pour respecter les chemins d'accès vers les icônes.
 
-Consulter la [documentation des paramètres d’affichage](https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/parametre-d-affichage) afin d’en savoir plus.
+### Intégration HTML
+
+Pour utiliser les ressources du DSFR sur les pages ADEME, les fichiers sont à intégrer dans les fichiers HTML comme l'exemple ci dessous.
+
+Afin d’inclure la totalité des composants et des styles du système de design, il est nécessaire d’inclure la feuille de style `dsfr.min.css`.
+Les classes utilitaires, notamment les icônes, sont disponibles dans un fichier à part dans `utility/utility.scss`.
+
+L’ensemble du code javascript nécessaire au bon fonctionnement du DS se trouve dans deux fichiers `dist/dsfr.module.min.js` et `dist/dsfr.nomodule.min.js`.
+Le fichier dsfr.module.min.js utilise les modules javascript natifs - sa balise script d’appel doit avoir l’attribut **type=”module”**.
+Le fichier dsfr.nomodule.min.js est utilisé par les anciens navigateurs ne supportant pas les modules javascript (es6) - sa balise script doit contenir l’attribut **nomodule**.
+Il est **impératif** d’appeler les **deux fichiers** javascript afin que le code s’exécute correctement sur l’ensemble des navigateurs supportés.
 
 ```html
-<!doctype html>
-<html lang="fr" data-fr-scheme="system">
+<!DOCTYPE html>
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Titre de la page - Agence de la transition écologique</title>
 
-    <meta name="theme-color" content="#000091"><!-- Défini la couleur de thème du navigateur (Safari/Android) -->
-    <link rel="apple-touch-icon" href="favicon/apple-touch-icon.png"><!-- 180×180 -->
-    <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
-    <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon"><!-- 32×32 -->
-    <link rel="manifest" href="favicon/manifest.webmanifest" crossorigin="use-credentials">
-    <!-- Modifier les chemins relatifs des favicons en fonction de la structure du projet -->
-    <!-- Dans le fichier manifest.webmanifest aussi, modifier les chemins vers les images -->
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://image.contact.ademe.fr/lib/fe36117175640479761276/m/1/favicon.png">
 
-    <link rel="stylesheet" href="dsfr.min.css">
-    <link rel="stylesheet" href="utility/utility.min.css">
+    <!-- Feuilles de Styles DSFR -->
+    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/dsfr.min.css">
+    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/utility/ademe.utility.min.css">
 
-    <title>Titre de la page - Nom du site</title>
+    <!-- Feuille de Styles commune à toutes les CloudPages ADEME -->
+    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.main.css">
+    
+    <!-- Style spécifique à cette page -->
+    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/customs/example.custom.css">
+
+    <!-- Style spécifique à cette page inline -->
+    <style></style>
+
   </head>
   <body>
 
-    <!--
-      code de la page
-     -->
+    <!-- Code de la page -->
 
-    <!-- Script en version es6 module et nomodule pour les navigateurs le ne supportant pas -->
-    <script type="module" src="dsfr.module.min.js"></script>
-    <script type="text/javascript" nomodule src="dsfr.nomodule.min.js"></script>
+    <!-- Script DSFR en version es6 module et nomodule pour les navigateurs le ne supportant pas -->
+    <script type="module" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/dsfr.module.min.js"></script>
+    <script type="text/javascript" nomodule src="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/dsfr.nomodule.min.js"></script>
+
+    <!-- Script spécifique à cette page -->
+    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.main.js"></script>
+    
+    <!-- Script spécifique à cette page inline -->
+    <script></script>
+    
+    <!-- Script pour le redimensionnement de l'iframe (UNIQUEMENT POUR lES IFRAMES) -->
+    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.iframe.resize.js"></script>
   </body>
 </html>
 ```
-
-**Les CSS**
-
-Afin d’inclure la totalité des composants et des styles du système de design, il est nécessaire d’inclure la feuille de style `dist/dsfr.min.css`.
-
-Les classes utilitaires, notamment les icônes, sont disponibles dans un fichier à part dans `dist/utility/utility.scss`.
-```html
-<html>
-  <head>
-    <link rel="stylesheet" href="dsfr.min.css">
-    <link rel="stylesheet" href="utility/utility.min.css">
-```
-Il est aussi possible d’importer uniquement ce que l’on souhaite utiliser. En effet, pour ajouter un composant seul il suffit d’importer son CSS ainsi que celui de chacune des dépendances de ce composant. Ces dépendances sont listés dans le `README.md` de chaque package.
-
-```html
-<html>
-  <head>
-    <link rel="stylesheet" href="core.min.css">
-    <link rel="stylesheet" href="link.min.css">
-    <link rel="stylesheet" href="button.min.css">
-```
-
-
-**Le Javascript**
-
-L’ensemble du code javascript nécessaire au bon fonctionnement du DS se trouve dans deux fichiers `dist/dsfr.module.min.js` et `dist/dsfr.nomodule.min.js`.
-
-
-Le fichier dsfr.module.min.js utilise les modules javascript natifs - sa balise script d’appel doit avoir l’attribut **type=”module”**.
-
-Le fichier dsfr.nomodule.min.js est utilisé par les anciens navigateurs ne supportant pas les modules javascript (es6) - sa balise script doit contenir l’attribut **nomodule**.
-Il est **impératif** d’appeler les **deux fichiers** javascript afin que le code s’exécute correctement sur l’ensemble des navigateurs supportés :
-
-```html
-    <script type="module" src="dsfr.module.min.js"></script>
-    <script type="text/javascript" nomodule src="dsfr.nomodule.min.js"></script>
-  </body>
-</html>
-```
-
-> NB : Le package analytics est géré indépendament et doit être ajouté après le js du dsfr. Voir [documention analytics](https://github.com/GouvernementFR/dsfr/blob/main/src/analytics/doc/analytics.md)
-
-De la même façon que le CSS il est possible d’importer uniquement le JS des composants utilisés (et leurs dépendances).
 
 ### Icônes
 
-Les icônes sont stockées dans `dist/icons` et classées par catégories.
+Les icônes sont stockées dans `icons/` et classées par catégories.
 
 Le design système utilise principalement des icônes de la librairie remixIcon. Il existe aussi des icônes personnalisées, celles-ci sont préfixée par “fr--”.
 
 Afin d’utiliser ces icônes, des classes utilitaires CSS sont associés à chaque icône. Par ex. : `fr-icon-error-fill`
 
-Ces classes sont disponibles dans `utility` qui importe `dist/utility/icons/icons.css`.
-
-Il est aussi possible d’importer uniquement certaines catégories d’icônes afin d’optimiser le poids. Par ex. :  `dist/utility/icons/system/system.css` pour les icônes “system”.
+Ces classes sont disponibles dans `utility` qui importe `utility/icons/icons.css`.
 
 Pour plus d’informations : [Voir la documentation des icônes](https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/icones).
-
-### Favicon
-
-[La documentation des favicons](https://www.systeme-de-design.gouv.fr/elements-d-interface/fondamentaux-techniques/icone-de-favoris) détaille la façon de les implémenter dans vos pages.
 
 ## Fonctionnement
 
@@ -162,13 +177,19 @@ Des éléments (ou enfants), peuvent être placés à l'intérieur de ces blocks
 
 Les modifiers quant à eux, servent à manipuler les blocs, de manière à les styliser de manière indépendante en s'assurant de ne pas induire de changement à des blocks sans aucun rapport avec celui-ci. Ils sont notés à l'aide de deux tirets précédés du nom du block comme suit : `.parent--modifier`.
 
-### Utilisation
+### Composants
 
 Le **DSFR** est constitué de différents composants, que vous pouvez utiliser indépendamment au sein de votre projet.
 
 Une documentation spécifique est prévue pour chaque composant, précisant ses principes d’utilisation, ainsi que les snippets de code HTML à utiliser pour votre projet.
 
 🙌 Vous êtes maintenant prêt(e) à utiliser le **DSFR**.
+
+### Thèmes clair et sombre
+
+L’ajout de l’attribut **data-fr-scheme** sur la balise html permet d’activer la gestion des thèmes clair et sombre. Les valeurs possibles sont `system`, `light`, `dark`. La valeur “system” permet d’utiliser la configuration définie sur le système d’exploitation de l’utilisateur.
+
+Consulter la [documentation des paramètres d’affichage](https://www.systeme-de-design.gouv.fr/elements-d-interface/composants/parametre-d-affichage) afin d’en savoir plus.
 
 ## Documentation
 
