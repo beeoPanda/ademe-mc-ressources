@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "@gouvfr/dsfr": "^1.11.2"
+  },
+  "scripts": {
+    "check-dsfr": "if exist ademe-dsfr\\dsfr (rmdir /s /q ademe-dsfr\\dsfr)",
+    "create-dsfr": "mkdir ademe-dsfr\\dsfr && mkdir ademe-dsfr\\dsfr\\icons && mkdir ademe-dsfr\\dsfr\\fonts && mkdir ademe-dsfr\\dsfr\\utility",
+    "copy-files": "copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.min.css ademe-dsfr\\dsfr\\dsfr.min.css && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.module.min.js ademe-dsfr\\dsfr\\dsfr.module.min.js && copy node_modules\\@gouvfr\\dsfr\\dist\\dsfr\\dsfr.nomodule.min.js ademe-dsfr\\dsfr\\dsfr.nomodule.min.js && xcopy node_modules\\@gouvfr\\dsfr\\dist\\icons\\* ademe-dsfr\\dsfr\\icons\\ /E /I && xcopy node_modules\\@gouvfr\\dsfr\\dist\\fonts\\* ademe-dsfr\\dsfr\\fonts\\ /E /I && copy node_modules\\@gouvfr\\dsfr\\dist\\utility\\utility.min.css ademe-dsfr\\dsfr\\utility\\utility.min.css && echo 'Tous les fichiers du DSFR on bien été copiés'",
+    "first-setup-dsfr": "npm run check-dsfr && npm run create-dsfr && npm run copy-files"
+  }
+}
