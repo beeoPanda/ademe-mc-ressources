@@ -24,6 +24,7 @@ Voir les [conditions générales d'utilisation](doc/legal/cgu.md).
 
 >This Design System is only meant to be used by official French public services' websites and apps. Its main purpose is to make it easy to identify governmental websites for citizens. See terms.
 
+
 ## Démarrage
 
 **Prérequis :**
