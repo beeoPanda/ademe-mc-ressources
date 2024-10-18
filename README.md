@@ -38,59 +38,19 @@ Une fois que vous disposez des droit de contribution au projet (contactez votre 
 git clone <URL_DU_PROJET>
 ```
 
-🙌 Vous pouvez désormais ouvrir le nouveau dossier du projet créé dans votre éditeur préféré et travailler sur les fichiers.
-
-### Déploiement
+### Développement & Déploiement
 
 #### 1. ⚠️ Avant le développement
 - Lancez GitHub Desktop et ouvrez le projet en cours;
 - Cliquer sur `Branch` puis `New Branch` pour créer une nouvelle branche de développement indépendante à partir de `Main` (dernière version stable en PROD);
-- Nommer la branche selon l'US en cours (par exemple, `CRM-1470`) et validez;
+- Nommer la branche selon l'US en cours (par exemple, `CRM-XXXX`) et validez;
 *❗Si des des développements non sauvegardées existent, un message demande ce que vous souhaitez faire des modifications en cours. Cliquez sur `Bring my changes to CRM-XXXX` pour ne pas perdre le travail en cours.*
-- Faites un **pull origin** en cliquant sur `Fetch origin` pour récupérer les dernières modifications de la branche DEV depuis GitLab.
-
-#### 2. Créer une branche de développement spécifique à votre US
-- Toujours dans GitHub Desktop, cliquer sur `Branch` puis `New Branch`.
-
-- S'assurer que la nouvelle branche est basée sur DEV.
+- Une fois la nouvelle branche `CRM-XXXX` créée, faites `Publish Branch` pour publier la branche dans le projet.
 
 🙌 Vous pouvez désormais cliquer sur `Open in VS Code` et commencer à développer.
 
-#### 3. Développer la fonctionnalité
-- Effectuer les modifications dans le code.
-- Tester les modifications localement pour assurer leur bon fonctionnement.
-
-#### 4. Commiter les modifications
-- Dans GitHub Desktop, sélectionner les fichiers modifiés.
-- Rédiger un message de commit clair et descriptif.
-- Cliquer sur **Commit to [nom de ta branche]**.
-
-#### 5. Pousser les modifications
-- Cliquer sur **Push origin** pour envoyer la branche de fonctionnalité sur GitLab.
-
-#### 6. Créer une merge request (MR)
-- Accéder au projet sur GitLab.
-- Naviguer vers l'onglet **Merge Requests**.
-- Cliquer sur **New Merge Request**.
-- Sélectionner la branche de fonctionnalité comme source et DEV comme cible.
-- Remplir les détails de la MR et la créer.
-
-#### 7. Revue de code
-- Demander une revue de code à un autre développeur.
-- Intégrer les commentaires et les modifications suggérées.
-
-#### 8. Fusionner la MR
-- Une fois approuvée, fusionner la MR dans la branche DEV.
-- S'assurer que tout fonctionne correctement après la fusion.
-
-#### 9. Déployer sur la branche main
-- Vérifier que la branche DEV est à jour avec les dernières modifications.
-- Créer une nouvelle MR pour fusionner DEV dans main.
-- Suivre le même processus de revue et de fusion.
-
-#### 10. Vérifications post-déploiement
-- Vérifier que l'application fonctionne correctement sur la branche main après le déploiement.
-- Effectuer des tests supplémentaires si nécessaire.
+#### 2. Travail en collaboration
+- 
 
 ### Mise à jour du DSFR
 
