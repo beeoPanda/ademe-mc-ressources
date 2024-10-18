@@ -42,7 +42,55 @@ git clone <URL_DU_PROJET>
 
 ### Déploiement
 
-*Process Github Desktop à définir...*
+#### 1. ⚠️ Avant le développement
+- Lancez GitHub Desktop et ouvrez le projet en cours;
+- Cliquer sur `Branch` puis `New Branch` pour créer une nouvelle branche de développement indépendante à partir de `Main` (dernière version stable en PROD);
+- Nommer la branche selon l'US en cours (par exemple, `CRM-1470`) et validez;
+*❗Si des des développements non sauvegardées existent, un message demande ce que vous souhaitez faire des modifications en cours. Cliquez sur `Bring my changes to CRM-XXXX` pour ne pas perdre le travail en cours.*
+- Faites un **pull origin** en cliquant sur `Fetch origin` pour récupérer les dernières modifications de la branche DEV depuis GitLab.
+
+#### 2. Créer une branche de développement spécifique à votre US
+- Toujours dans GitHub Desktop, cliquer sur `Branch` puis `New Branch`.
+
+- S'assurer que la nouvelle branche est basée sur DEV.
+
+🙌 Vous pouvez désormais cliquer sur `Open in VS Code` et commencer à développer.
+
+#### 3. Développer la fonctionnalité
+- Effectuer les modifications dans le code.
+- Tester les modifications localement pour assurer leur bon fonctionnement.
+
+#### 4. Commiter les modifications
+- Dans GitHub Desktop, sélectionner les fichiers modifiés.
+- Rédiger un message de commit clair et descriptif.
+- Cliquer sur **Commit to [nom de ta branche]**.
+
+#### 5. Pousser les modifications
+- Cliquer sur **Push origin** pour envoyer la branche de fonctionnalité sur GitLab.
+
+#### 6. Créer une merge request (MR)
+- Accéder au projet sur GitLab.
+- Naviguer vers l'onglet **Merge Requests**.
+- Cliquer sur **New Merge Request**.
+- Sélectionner la branche de fonctionnalité comme source et DEV comme cible.
+- Remplir les détails de la MR et la créer.
+
+#### 7. Revue de code
+- Demander une revue de code à un autre développeur.
+- Intégrer les commentaires et les modifications suggérées.
+
+#### 8. Fusionner la MR
+- Une fois approuvée, fusionner la MR dans la branche DEV.
+- S'assurer que tout fonctionne correctement après la fusion.
+
+#### 9. Déployer sur la branche main
+- Vérifier que la branche DEV est à jour avec les dernières modifications.
+- Créer une nouvelle MR pour fusionner DEV dans main.
+- Suivre le même processus de revue et de fusion.
+
+#### 10. Vérifications post-déploiement
+- Vérifier que l'application fonctionne correctement sur la branche main après le déploiement.
+- Effectuer des tests supplémentaires si nécessaire.
 
 ### Mise à jour du DSFR
 
@@ -85,15 +133,27 @@ npm run dl-last-dsfr-version
 └── ademe.main.js
 ```
 
+### Structure de base du DSFR
+
 L'ensemble des ressources utiles du DSFR sont copiées sous `dsfr/` et sont **versionnées** dans les sous-dossiers `vX.X.X/`.
-
-Les ressources sous `dsfr/` **ne doivent pas être modifiées**. Pour ajuster le style et le comportement du DSFR au sein de l'ensemble des sites de l'ADEME, nous utilisons les fichiers `ademe.main.css` et `ademe.main.js` à la racine du projet. Pour des ajustements du DSFR spécifiques à certaines pages, les fichiers devront être placés sous `customs/`.
-
-Les ressources images complémentaires du DSFR pourront être chargées dans le dossier `images/`
 
 Les polices de caractères utilisées sur le DSFR, à savoir la Marianne et la Spectral, sont des fichiers .woff et .woff2, ils doivent se trouver dans le répertoire `fonts/`. Les dossiers `fonts/` et `favicon/` doivent être placés sous `dsfr/vX.X.X/`.
 
 Le fichier `utility.min.css` doit être placé un niveau plus bas que le dossier `icons/`, dans dossier `utility/` par exemple, pour respecter les chemins d'accès vers les icônes.
+
+⚠️ Les ressources sous `dsfr/` **ne doivent pas être modifiées**.
+
+### Ressources ADEME
+
+Pour ajuster le style et le comportement du DSFR **sur l'ensemble des pages WEB de l'ADEME**, nous utilisons les fichiers `ademe.main.css` et `ademe.main.js` sous `commons/`. 
+
+Pour les ressources CSS/JS communes à certains composants tel que l'iframe resizer, les fichiers devront être placés dans `utils/`.
+
+Pour des ajustements du DSFR spécifiques à certaines pages, les fichiers devront être placés sous `customs/`.
+
+Les ressources images complémentaires du DSFR pourront être chargées dans le dossier `images/`
+
+⚠️ Les modifications apportées à des ressources communes à plusieurs pages peuvent produire des regressions.
 
 ### Intégration HTML
 
@@ -124,7 +184,7 @@ Il est **impératif** d’appeler les **deux fichiers** javascript afin que le c
     <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/utility/ademe.utility.min.css">
 
     <!-- Feuille de Styles commune à toutes les CloudPages ADEME -->
-    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.main.css">
+    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/commons/ademe.main.css">
     
     <!-- Style spécifique à cette page -->
     <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/customs/example.custom.css">
@@ -142,13 +202,13 @@ Il est **impératif** d’appeler les **deux fichiers** javascript afin que le c
     <script type="text/javascript" nomodule src="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/dsfr.nomodule.min.js"></script>
 
     <!-- Script spécifique à cette page -->
-    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.main.js"></script>
+    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/commons/ademe.main.js"></script>
     
     <!-- Script spécifique à cette page inline -->
     <script></script>
     
     <!-- Script pour le redimensionnement de l'iframe (UNIQUEMENT POUR lES IFRAMES) -->
-    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.iframe.resize.js"></script>
+    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/utils/ademe.iframe.resize.js"></script>
   </body>
 </html>
 ```
