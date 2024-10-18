@@ -24,6 +24,7 @@ Voir les [conditions générales d'utilisation](doc/legal/cgu.md).
 
 >This Design System is only meant to be used by official French public services' websites and apps. Its main purpose is to make it easy to identify governmental websites for citizens. See terms.
 
+
 ## Démarrage
 
 **Prérequis :**
@@ -38,11 +39,19 @@ Une fois que vous disposez des droit de contribution au projet (contactez votre 
 git clone <URL_DU_PROJET>
 ```
 
-🙌 Vous pouvez désormais ouvrir le nouveau dossier du projet créé dans votre éditeur préféré et travailler sur les fichiers.
+### Développement & Déploiement
 
-### Déploiement
+#### 1. ⚠️ Avant le développement
+- Lancez GitHub Desktop et ouvrez le projet en cours;
+- Cliquer sur `Branch` puis `New Branch` pour créer une nouvelle branche de développement indépendante à partir de `Main` (dernière version stable en PROD);
+- Nommer la branche selon l'US en cours (par exemple, `CRM-XXXX`) et validez;
+*❗Si des des développements non sauvegardées existent, un message demande ce que vous souhaitez faire des modifications en cours. Cliquez sur `Bring my changes to CRM-XXXX` pour ne pas perdre le travail en cours.*
+- Une fois la nouvelle branche `CRM-XXXX` créée, faites `Publish Branch` pour publier la branche dans le projet.
 
-*Process Github Desktop à définir...*
+🙌 Vous pouvez désormais cliquer sur `Open in VS Code` et commencer à développer.
+
+#### 2. Travail en collaboration
+- 
 
 ### Mise à jour du DSFR
 
@@ -85,15 +94,27 @@ npm run dl-last-dsfr-version
 └── ademe.main.js
 ```
 
+### Structure de base du DSFR
+
 L'ensemble des ressources utiles du DSFR sont copiées sous `dsfr/` et sont **versionnées** dans les sous-dossiers `vX.X.X/`.
-
-Les ressources sous `dsfr/` **ne doivent pas être modifiées**. Pour ajuster le style et le comportement du DSFR au sein de l'ensemble des sites de l'ADEME, nous utilisons les fichiers `ademe.main.css` et `ademe.main.js` à la racine du projet. Pour des ajustements du DSFR spécifiques à certaines pages, les fichiers devront être placés sous `customs/`.
-
-Les ressources images complémentaires du DSFR pourront être chargées dans le dossier `images/`
 
 Les polices de caractères utilisées sur le DSFR, à savoir la Marianne et la Spectral, sont des fichiers .woff et .woff2, ils doivent se trouver dans le répertoire `fonts/`. Les dossiers `fonts/` et `favicon/` doivent être placés sous `dsfr/vX.X.X/`.
 
 Le fichier `utility.min.css` doit être placé un niveau plus bas que le dossier `icons/`, dans dossier `utility/` par exemple, pour respecter les chemins d'accès vers les icônes.
+
+⚠️ Les ressources sous `dsfr/` **ne doivent pas être modifiées**.
+
+### Ressources ADEME
+
+Pour ajuster le style et le comportement du DSFR **sur l'ensemble des pages WEB de l'ADEME**, nous utilisons les fichiers `ademe.main.css` et `ademe.main.js` sous `commons/`. 
+
+Pour les ressources CSS/JS communes à certains composants tel que l'iframe resizer, les fichiers devront être placés dans `utils/`.
+
+Pour des ajustements du DSFR spécifiques à certaines pages, les fichiers devront être placés sous `customs/`.
+
+Les ressources images complémentaires du DSFR pourront être chargées dans le dossier `images/`
+
+⚠️ Les modifications apportées à des ressources communes à plusieurs pages peuvent produire des regressions.
 
 ### Intégration HTML
 
@@ -124,7 +145,7 @@ Il est **impératif** d’appeler les **deux fichiers** javascript afin que le c
     <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/utility/ademe.utility.min.css">
 
     <!-- Feuille de Styles commune à toutes les CloudPages ADEME -->
-    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.main.css">
+    <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/commons/ademe.main.css">
     
     <!-- Style spécifique à cette page -->
     <link rel="stylesheet" href="https://<URL_GITLAB>/refs/heads/<BRANCH>/customs/example.custom.css">
@@ -142,13 +163,13 @@ Il est **impératif** d’appeler les **deux fichiers** javascript afin que le c
     <script type="text/javascript" nomodule src="https://<URL_GITLAB>/refs/heads/<BRANCH>/dsfr/<VERSION>/dsfr.nomodule.min.js"></script>
 
     <!-- Script spécifique à cette page -->
-    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.main.js"></script>
+    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/commons/ademe.main.js"></script>
     
     <!-- Script spécifique à cette page inline -->
     <script></script>
     
     <!-- Script pour le redimensionnement de l'iframe (UNIQUEMENT POUR lES IFRAMES) -->
-    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/ademe.iframe.resize.js"></script>
+    <script type="text/javascript" src="https://<URL_GITLAB>/refs/heads/<BRANCH>/utils/ademe.iframe.resize.js"></script>
   </body>
 </html>
 ```
